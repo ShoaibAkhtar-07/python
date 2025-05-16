@@ -19,6 +19,4 @@
 # b = int(input("enter 2 num :"))
 # print(a+b)
 
-a=0.1
-b=0.2
-print(a+b)
+import this
