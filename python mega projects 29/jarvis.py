@@ -2,9 +2,11 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 import musiclibrary
+import requests
 
 r = sr.Recognizer()
 engine = pyttsx3.init()
+newsapi = "b92aba363afe41b78c4806a2cd2aab46" 
 
 def speak(text):
     print(f"Jarvis: {text}")
@@ -26,6 +28,9 @@ def processcommand(s):
     elif s == "open linkedin":
         speak("Opening LinkedIn")
         webbrowser.open("https://www.linkedin.com/")
+    elif s == "can you hear the music":
+        speak("Yes, I can")
+        webbrowser.open("https://www.youtube.com/watch?v=LYigiwbaX_U&pp=ygUWY2FuIHlvdSBoZWFyIHRoZSBtdXNpYw%3D%3D")
     elif s.startswith("play"):
         song = s.replace("play", "").strip()
         if song in musiclibrary.music:
@@ -33,6 +38,17 @@ def processcommand(s):
             webbrowser.open(musiclibrary.music[song])
         else:
             speak(f"Sorry, I couldn't find the song: {song}")
+    elif s == "news":
+        response = requests.get("https://newsapi.org/v2/top-headlines?country=in&apiKey=b92aba363afe41b78c4806a2cd2aab46")
+        # Check response
+        if response.status_code == 200:
+           data = response.json()
+           articles = data.get("articles", [])
+           for article in articles :
+              speak(article["title"])
+        else:
+           print("Failed to fetch news")
+
     else:
         speak("Sorry, I don't know how to do that.")
 
@@ -43,7 +59,7 @@ if __name__ == "__main__":
             with sr.Microphone() as source:
                 r.adjust_for_ambient_noise(source)
                 print("Listening for wake word...")
-                audio = r.listen(source, timeout=5, phrase_time_limit=3)
+                audio = r.listen(source, timeout=5, phrase_time_limit=5)
                 word = r.recognize_google(audio)
                 print(f"You said: {word}")
 
@@ -57,5 +73,9 @@ if __name__ == "__main__":
                     print(f"Command: {command}")
                     processcommand(command)
                     
+        except sr.UnknownValueError:
+            speak("Sorry, I couldn't understand that.")
+        except sr.RequestError as e:
+            speak(f"API error: {e}")
         except Exception as e:
             print(f"Unexpected error: {e}")
