@@ -6,10 +6,9 @@ import requests
 
 r = sr.Recognizer()
 engine = pyttsx3.init()
-newsapi = "b92aba363afe41b78c4806a2cd2aab46" 
 
 def speak(text):
-    print(f"Jarvis: {text}")
+    print(f"jarvis: {text}")
     engine.say(text)
     engine.runAndWait()
 
@@ -39,7 +38,7 @@ def processcommand(s):
         else:
             speak(f"Sorry, I couldn't find the song: {song}")
     elif s == "news":
-        response = requests.get("https://newsapi.org/v2/top-headlines?country=in&apiKey=b92aba363afe41b78c4806a2cd2aab46")
+        response = requests.get("https://newsapi.org/v2/top-headlines?country=us&apiKey=b92aba363afe41b78c4806a2cd2aab46")
         # Check response
         if response.status_code == 200:
            data = response.json()
@@ -53,7 +52,7 @@ def processcommand(s):
         speak("Sorry, I don't know how to do that.")
 
 if __name__ == "__main__":
-    speak("~~~ Initializing Jarvis ~~~")
+    speak("~~~ Initializing jarvis ~~~")
     while True:
         try:
             with sr.Microphone() as source:
@@ -64,7 +63,7 @@ if __name__ == "__main__":
                 print(f"You said: {word}")
 
             if word.lower() == "jarvis":
-                speak("Yes?")
+                speak("yes? How can I help you?")
                 with sr.Microphone() as source:
                     r.adjust_for_ambient_noise(source)
                     print("Listening for command...")
