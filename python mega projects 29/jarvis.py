@@ -42,7 +42,7 @@ def processcommand(s):
         # Check response
         if response.status_code == 200:
            data = response.json()
-           articles = data.get("articles", [])
+           articles = data.get("articles", [])[:10]
            for article in articles :
               speak(article["title"])
         else:
