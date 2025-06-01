@@ -10,5 +10,7 @@ music = {
     "treat you better" : "https://www.youtube.com/watch?v=lY2yjAdbvdQ&pp=ygUQdHJlYXQgeW91IGJldHRlcg%3D%3D",
     "stitches" : "https://www.youtube.com/watch?v=VbfpW0pbvaU&pp=ygUIc3RpdGNoZXM%3D",
     "hall of fame" :"https://youtu.be/3Kxf2dHlDpQ",
+    "in the stars":"https://youtu.be/Wdl3qal2E2I?list=RDMM",
+    "warrior":"https://youtu.be/rqrwLLE1azI?list=RDMM"
 
 }
