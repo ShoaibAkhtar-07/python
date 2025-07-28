@@ -2,7 +2,7 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 import musiclibrary
-import requests
+import requests 
 
 r = sr.Recognizer()
 engine = pyttsx3.init()
@@ -14,7 +14,6 @@ def speak(text):
 
 def processcommand(s):
     s = s.lower().strip()
-
     if s == "open google":
         speak("Opening Google")
         webbrowser.open("https://www.google.com/")
@@ -39,15 +38,13 @@ def processcommand(s):
             speak(f"Sorry, I couldn't find the song: {song}")
     elif s == "news":
         response = requests.get("https://newsapi.org/v2/top-headlines?country=us&apiKey=b92aba363afe41b78c4806a2cd2aab46")
-        # Check response
         if response.status_code == 200:
-           data = response.json()
-           articles = data.get("articles", [])[:10]
-           for article in articles :
-              speak(article["title"])
+            data = response.json()
+            articles = data.get("articles", [])[:10]
+            for article in articles:
+                speak(article["title"])
         else:
-           print("Failed to fetch news")
-
+            print("Failed to fetch news")
     else:
         speak("Sorry, I don't know how to do that.")
 
@@ -61,7 +58,6 @@ if __name__ == "__main__":
                 audio = r.listen(source, timeout=5, phrase_time_limit=5)
                 word = r.recognize_google(audio)
                 print(f"You said: {word}")
-
             if word.lower() == "jarvis":
                 speak("yes? How can I help you?")
                 with sr.Microphone() as source:
@@ -71,10 +67,10 @@ if __name__ == "__main__":
                     command = r.recognize_google(audio)
                     print(f"Command: {command}")
                     processcommand(command)
-                    
         except sr.UnknownValueError:
             speak("Sorry, I couldn't understand that.")
         except sr.RequestError as e:
             speak(f"API error: {e}")
         except Exception as e:
             print(f"Unexpected error: {e}")
+            speak("An unexpected error occurred. Please try again.")
