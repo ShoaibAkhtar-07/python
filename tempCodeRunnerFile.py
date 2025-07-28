@@ -1,1 +1,0 @@
-print(list(filter(lambda x: x>3,l)))
