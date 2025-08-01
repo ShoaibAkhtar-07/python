@@ -441,29 +441,58 @@
 # ca.cat_details()
 
 
-# multiple inheritance
+# # multiple inheritance
 
-class student:
-    def __init__(self,name):
-        self.name = name
-    def show(self):
-        print(f"The name of the student is {self.name}")
+# class student:
+#     def __init__(self,name):
+#         self.name = name
+#     def show(self):
+#         print(f"The name of the student is {self.name}")
         
-class skill:
-    def __init__(self,language):
-        self.language = language
-    def show(self):
-        print(f"The programing language which i know {self.language}")
+# class skill:
+#     def __init__(self,language):
+#         self.language = language
+#     def show(self):
+#         print(f"The programing language which i know {self.language}")
         
-class stuskill(skill,student):
-    def __init__(self,name,language):
-        self.name = name
-        self.language = language
+# class stuskill(skill,student):
+#     def __init__(self,name,language):
+#         self.name = name
+#         self.language = language
 
-s1 = stuskill("shoaib"," C,PYTHON")
-s1.show()
-print(stuskill.mro())
+# s1 = stuskill("shoaib"," C,PYTHON")
+# s1.show()
+# print(stuskill.mro())
+
+
+# multilevel inheritance
+
+class employee:
+    def __init__(self,name,company):
+        self.company = company
+        self.name = name
+    def show_details(self):
+        print(f"Company name = {self.company}")
+        print(f"employee name = {self.name}")
         
+class comp_tea(employee):
+    def __init__(self,name,team):
+        employee.__init__(self,name,company = "TESLA")
+        self.team = team
         
+    def show_details(self):
+        employee.show_details(self)
+        print(f"Team name = {self.team}")
+        
+class comp_tea_leader(comp_tea):
+    def __init__(self, name, teamlea):
+        comp_tea.__init__(self,name,team = "voice control")
+        self.teamlea = teamlea
+        
+    def show_details(self):
+        comp_tea.show_details(self)
+        print(f"Team leader = {self.teamlea}")
+        
+e1 = comp_tea_leader("shoaib","akhtar")
+e1.show_details()
     
-        
