@@ -495,4 +495,5 @@ class comp_tea_leader(comp_tea):
         
 e1 = comp_tea_leader("shoaib","akhtar")
 e1.show_details()
+print(comp_tea_leader.mro())
     
