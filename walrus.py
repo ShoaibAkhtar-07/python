@@ -30,12 +30,14 @@
   
    
    
-# 4
-
-results = [y for x in range(10) if (y := x**2) > 10]
-print(results)
-
-
-                                     
+# # 4
+# results = [y for x in range(1,10) if (y := x**2) > 10]
+# print(results)
 
 
+   
+# 5
+
+n = [1,4,2,3,5,6,7]
+while (n := len(n)) > 0:
+    print(n.pop())
